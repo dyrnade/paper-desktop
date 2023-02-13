@@ -27,7 +27,7 @@
       with lib; let
         xcfg = config.services.xserver;
         cfg = xcfg.desktopManager.paperde;
-        paperdes = pkgsz.callPackage ./paperde {  };
+        paperdes = pkgsz.callPackage ./paperde { makeScope = lib.makeScope; };
       in {
         options = {
           services.xserver.desktopManager.paperde.enable = mkOption {
