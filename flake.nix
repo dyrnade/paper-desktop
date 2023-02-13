@@ -13,7 +13,8 @@
     ];
     genSystems = nixpkgs.lib.genAttrs supportedSystems;
     pkgs = genSystems (system: import nixpkgs {inherit system;});
-    paperdes = self.callPackage ./paperde { };
+    pkgs_ = import nixpkgs {inherit system;};
+    paperdes = pkgs_.callPackage ./paperde { };
   in {
     formatter = genSystems (system: pkgs.${system}.nixos);
     nixosModules.paperde-desktop = {
