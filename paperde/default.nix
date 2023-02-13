@@ -2,10 +2,6 @@
 let
   packages = self: with self; {
 
-    # For compiling information, see:
-    # - https://github.com/lxqt/lxqt/wiki/Building-from-source
-
-    ### BASE
     login1 = callPackage ./login1 {  };
     ipc = callPackage ./ipc { };
     status-notifier = callPackage ./status-notifier {  };
