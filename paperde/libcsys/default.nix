@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
     owner = "dyrnade";
     repo = pname;
     rev = "${version}";
-    sha256 = "sha256-/iRFppe08+rMQNFjWSyxo3Noy0iNaelg0JAczg/BYBs=";
+    sha256 = "sha256-M8b2GJK7etS6rbYFOLNNueWKbVs6JEKFEro41QiOjAg=";
   };
 
   nativeBuildInputs = [

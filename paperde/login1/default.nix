@@ -3,7 +3,7 @@
   pname = "login1";
   version = "test";
   src = fetchFromGitLab {
-    hash = "sha256-iPujkSKXHXd60EG7L+s87/ejTotPbRHKXwrLdFDzzpU=";
+    hash = "sha256-LGEyRKOAgc9wMdAxMJ4Q6Dl/a0ikyVW7f/LQte5gLJI=";
     domain = "gitlab.com";
     owner = "dyrnade";
     repo = pname;

@@ -4,7 +4,7 @@
   pname = "status-notifier";
   version = "test";
   src = fetchFromGitLab {
-    hash = "sha256-xNq7elaj+deDPKlm8BSDdP0PpCtn9WC919AK7Hvh10g=";
+    hash = "sha256-v5UgHoOpuiT6FqRztN1JrjZT9z5pQTtOWd3dAnhvVEg=";
     domain = "gitlab.com";
     owner = "dyrnade";
     repo = pname;

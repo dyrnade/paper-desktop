@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     owner = "dyrnade";
     repo = pname;
     rev = "${version}";
-    sha256 = "sha256-+z5dXKaV2anN6OLMycEz87kDqQScgHHEKwGhDAdHSd4=";
+    sha256 = "sha256-0RgNcMEA4qP7UiRG9x/xdazlL7PsBnqv4raIa86ceSU=";
   };
 
   dontWrapQtApps = true;

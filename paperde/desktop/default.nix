@@ -12,11 +12,17 @@ cmake, glib, python3, qt6 }:
 
 # autoreconfHook
  stdenv.mkDerivation rec {
-  name = "paper/paperde";
-  version = "v0.2.1";
-  src = ./.;
+  pname = "paperde";
+  version = "test";
+  src = fetchFromGitLab {
+    hash = "sha256-sn8bgqXje3nhmazJXwZXwDLgt142/LFVAcRSE75gGgU=";
+    domain = "gitlab.com";
+    owner = "dyrnade";
+    repo = pname;
+    rev = version;
+  };
+
   outputs = [ "out" ];
-  #mesonAutoFeatures = "auto";
   nativeBuildInputs = [
       ninja meson cmake python3
   ];

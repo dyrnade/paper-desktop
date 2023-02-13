@@ -4,7 +4,7 @@
   pname = "ipc";
   version = "test";
   src = fetchFromGitLab {
-    hash = "sha256-7tjO7s14YdvgiApgJr5SpmLVA3jz644nuVRNiJQi9k4=";
+    hash = "sha256-iafhHhwbZf72BAqRcqGEl6jWlwyfjCzLYvRFoeNITz8=";
     domain = "gitlab.com";
     owner = "dyrnade";
     repo = pname;

@@ -5,7 +5,7 @@
   version = "test";
   # https://gitlab.com/desktop-frameworks/ipc.git
   src = fetchFromGitLab {
-    hash = "sha256-PL8XMddOtHsxgT6maDXMDvbHp2oW8CsMeKVtIAlmq7w=";
+    hash = "sha256-QFm/tk7UlpzQTUGbX6dLE8vilRNFRzym/Ah75fb71PU=";
     domain = "gitlab.com";
     owner = "dyrnade";
     repo = pname;
