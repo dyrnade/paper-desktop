@@ -13,7 +13,7 @@
     ];
     genSystems = nixpkgs.lib.genAttrs supportedSystems;
     pkgs = genSystems (system: import nixpkgs {inherit system;});
-    pkgs_ = import nixpkgs {inherit system;};
+    pkgs_ = import nixpkgs { currentSystem = "x86_64-linux";};
     paperdes = pkgs_.callPackage ./paperde { };
   in {
     formatter = genSystems (system: pkgs.${system}.nixos);
