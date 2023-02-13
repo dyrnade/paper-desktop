@@ -15,7 +15,7 @@
     pkgs = genSystems (system: import nixpkgs {inherit system;});
     paperdes = pkgs.callPackage ./paperde { };
   in {
-    formatter = genSystems (system: pkgs.${system}.alejandra);
+    formatter = genSystems (system: pkgs.${system}.nixos);
     nixosModules.paperde-desktop = {
       config,
       lib,
