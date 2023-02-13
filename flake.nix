@@ -3,19 +3,20 @@
 
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs?ref=nixos-unstable;
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
   };
   outputs = {
     self,
     nixpkgs,
-  }: 
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-      lib = pkgs.lib;
-      paperdes = pkgs.callPackage ./paperde {};
-    in rec {
+  }: let
+    supportedSystems = [
+      "x86_64-linux"
+    ];
+    genSystems = nixpkgs.lib.genAttrs supportedSystems;
+    pkgs = genSystems (system: import nixpkgs {inherit system;});
+    pkgs_ = import nixpkgs { currentSystem = "x86_64-linux";};
+    pkgsz = inputs.nixpkgs.legacyPackages.x86_64-linux;
+    paperdes = pkgsz.callPackage ./paperde { };
+  in {
     formatter = genSystems (system: pkgs.${system}.nixos);
     nixosModules.paperde-desktop = {
       config,
