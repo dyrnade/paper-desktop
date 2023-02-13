@@ -14,8 +14,7 @@
     genSystems = nixpkgs.lib.genAttrs supportedSystems;
     pkgs = genSystems (system: import nixpkgs {inherit system;});
     pkgs_ = import nixpkgs { currentSystem = "x86_64-linux";};
-    pkgsz = inputs.nixpkgs.legacyPackages.x86_64-linux;
-    paperdes = pkgsz.callPackage ./paperde { };
+    pkgsz = nixpkgs.legacyPackages.x86_64-linux;
   in {
     formatter = genSystems (system: pkgs.${system}.nixos);
     nixosModules.paperde-desktop = {
@@ -28,6 +27,7 @@
       with lib; let
         xcfg = config.services.xserver;
         cfg = xcfg.desktopManager.paperde;
+        paperdes = pkgsz.callPackage ./paperde {  };
       in {
         options = {
           services.xserver.desktopManager.paperde.enable = mkOption {
