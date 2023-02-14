@@ -8,15 +8,17 @@
     self,
     nixpkgs,
   }: let
-    supportedSystems = [
-      "x86_64-linux"
-    ];
-    genSystems = nixpkgs.lib.genAttrs supportedSystems;
-    pkgs = genSystems (system: import nixpkgs {inherit system;});
+    system = "x86_64-linux";
     pkgs_ = import nixpkgs { currentSystem = "x86_64-linux";};
     pkgsz = nixpkgs.legacyPackages.x86_64-linux;
-  in {
-    formatter = genSystems (system: pkgs.${system}.nixos);
+  in rec {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      inherit system;
+      modules = [
+        nixosModules.paperde-desktop
+        ./configuration.nix
+      ];
+    };
     nixosModules.paperde-desktop = {
       config,
       lib,
