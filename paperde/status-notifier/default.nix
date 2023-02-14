@@ -1,6 +1,6 @@
 { stdenv, ninja, meson, fetchFromGitLab, cmake, python3, pkgconfig, qt6 }:
 # autoreconfHook
- stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "status-notifier";
   version = "test";
   src = fetchFromGitLab {
@@ -14,12 +14,16 @@
   #mesonAutoFeatures = "auto";
 
   nativeBuildInputs = [
-      ninja meson cmake python3 pkgconfig
+    ninja
+    meson
+    cmake
+    python3
+    pkgconfig
   ];
-  
+
   buildInputs = [
-      qt6.full 
+    qt6.full
   ];
-  
+
   mesonFlags = [ "--prefix=${placeholder "out"}/usr --buildtype=release -Duse_qt_version=qt6" ];
 }

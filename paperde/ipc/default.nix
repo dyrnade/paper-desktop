@@ -1,6 +1,6 @@
 { stdenv, ninja, meson, fetchFromGitLab, pkgconfig, cmake, python3, qt6 }:
 # autoreconfHook
- stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "ipc";
   version = "test";
   src = fetchFromGitLab {
@@ -11,9 +11,14 @@
     rev = version;
   };
   outputs = [ "out" ];
-  
+
   nativeBuildInputs = [
-    ninja meson pkgconfig cmake python3 qt6.wrapQtAppsHook
+    ninja
+    meson
+    pkgconfig
+    cmake
+    python3
+    qt6.wrapQtAppsHook
   ];
   buildInputs = [
     qt6.qtbase

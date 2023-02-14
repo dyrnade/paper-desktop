@@ -33,10 +33,10 @@ in
 
     environment.systemPackages =
       pkgs.paperde.corePackages;
-    
+
     environment.sessionVariables.WAYFIRE_CONFIG_FILE = "${pkgs.paperde.paperde-desktop}/share/paperde/wayfire.ini";
     environment.sessionVariables.QT_QPA_PLATFORM = "wayland";
-    
+
     # Link some extra directories in /run/current-system/software/share
     environment.pathsToLink = [
       # FIXME: modules should link subdirs of `/share` rather than relying on this

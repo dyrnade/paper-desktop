@@ -1,6 +1,6 @@
 { stdenv, ninja, meson, ipc, fetchFromGitLab, pkgconfig, cmake, glib, python3, qt6 }:
 # autoreconfHook
- stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "applications";
   version = "test";
   # https://gitlab.com/desktop-frameworks/ipc.git
@@ -14,10 +14,16 @@
   outputs = [ "out" ];
   #mesonAutoFeatures = "auto";
   nativeBuildInputs = [
-    ninja meson pkgconfig cmake python3 qt6.wrapQtAppsHook ipc
+    ninja
+    meson
+    pkgconfig
+    cmake
+    python3
+    qt6.wrapQtAppsHook
+    ipc
   ];
   buildInputs = [
-    glib 
+    glib
     qt6.qtbase
   ];
   mesonFlags = [ "--prefix=${placeholder "out"}/usr --buildtype=release -Duse_qt_version=qt6" ];

@@ -1,6 +1,6 @@
 { stdenv, ninja, meson, fetchFromGitLab, wayland, wayland-protocols, pkgconfig, cmake, python3, qt6 }:
 # autoreconfHook
- stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "wayqt";
   version = "test";
   # https://gitlab.com/desktop-frameworks/ipc.git
@@ -15,7 +15,14 @@
 
 
   nativeBuildInputs = [
-    ninja meson pkgconfig cmake python3 qt6.wrapQtAppsHook wayland wayland-protocols
+    ninja
+    meson
+    pkgconfig
+    cmake
+    python3
+    qt6.wrapQtAppsHook
+    wayland
+    wayland-protocols
   ];
   buildInputs = [
     qt6.qtbase

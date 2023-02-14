@@ -5,7 +5,7 @@
 , cmake
 , ninja
 , qt6
-#, qtconnectivity
+  #, qtconnectivity
 }:
 
 stdenv.mkDerivation rec {

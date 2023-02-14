@@ -2,9 +2,9 @@
 let
   packages = self: with self; {
 
-    login1 = callPackage ./login1 {  };
+    login1 = callPackage ./login1 { };
     ipc = callPackage ./ipc { };
-    status-notifier = callPackage ./status-notifier {  };
+    status-notifier = callPackage ./status-notifier { };
     wayqt = callPackage ./wayqt { };
     applications = callPackage ./applications { inherit ipc; };
     libdbusmenu-qt = callPackage ./libdbusmenu-qt { };

@@ -1,17 +1,34 @@
-{ stdenv,
-qt5ct, 
-xdg-user-dirs, xwayland, wayqt, 
-ipc, login1, status-notifier, applications, CuboCore, ninja, 
-meson, fetchFromGitLab, xdg-desktop-portal, xdg-desktop-portal-kde, 
-xdg-desktop-portal-gtk, xdg-desktop-portal-wlr, wayland, wayland-protocols, 
-wayfire,
-libcprime,
-libcsys,
-libdbusmenu-qt,
-cmake, glib, python3, qt6 }:
+{ stdenv
+, qt5ct
+, xdg-user-dirs
+, xwayland
+, wayqt
+, ipc
+, login1
+, status-notifier
+, applications
+, CuboCore
+, ninja
+, meson
+, fetchFromGitLab
+, xdg-desktop-portal
+, xdg-desktop-portal-kde
+, xdg-desktop-portal-gtk
+, xdg-desktop-portal-wlr
+, wayland
+, wayland-protocols
+, wayfire
+, libcprime
+, libcsys
+, libdbusmenu-qt
+, cmake
+, glib
+, python3
+, qt6
+}:
 
 # autoreconfHook
- stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "paperde";
   version = "test";
   src = fetchFromGitLab {
@@ -24,17 +41,27 @@ cmake, glib, python3, qt6 }:
 
   outputs = [ "out" ];
   nativeBuildInputs = [
-      ninja meson cmake python3
+    ninja
+    meson
+    cmake
+    python3
   ];
-  
+
   buildInputs = [
-       wayqt login1 status-notifier ipc applications libcprime libcsys wayfire
-      libdbusmenu-qt
-      qt6.full 
+    wayqt
+    login1
+    status-notifier
+    ipc
+    applications
+    libcprime
+    libcsys
+    wayfire
+    libdbusmenu-qt
+    qt6.full
   ];
   passthru.providedSessions = [ "paperdesktop" ];
   mesonFlags = [ "--prefix=${placeholder "out"} --buildtype=release -Duse_qt_version=qt6" ];
-  
+
   patches = [
     ./0001-fix-application-dirs.patch
   ];
