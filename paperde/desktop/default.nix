@@ -47,12 +47,14 @@ clangStdenv.mkDerivation rec {
   };
 
   outputs = [ "out" ];
-  nativeBuildInputs = [
+  
+  buildInputs = [
+    qt6.wrapQtAppsHook
     gcc8
     lld
     gdb
     gnumake
-    qt6.full
+    qt6.qtbase
     ninja
     meson
     qt6.qttools
@@ -69,9 +71,6 @@ clangStdenv.mkDerivation rec {
     wayfire
     udisks2
     libcxx
-  ];
-
-  buildInputs = [
     wayqt
     login1
     status-notifier
@@ -80,12 +79,13 @@ clangStdenv.mkDerivation rec {
     libcprime
     libcsys
     wayfire
+    qt6.qtwayland
     libdbusmenu-qt
   ];
 
   passthru.providedSessions = [ "paperdesktop" ];
   mesonFlags = [ "--prefix=${placeholder "out"} --buildtype=release -Duse_qt_version=qt6" ];
-  dontWrapQtApps = true;
+  dontWrapQtApps = false;
   patches = [
     ./0001-fix-application-dirs.patch
   ];
