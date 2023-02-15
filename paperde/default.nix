@@ -13,7 +13,6 @@ let
     paperde-desktop = callPackage ./desktop { inherit libdbusmenu-qt libcprime libcsys wayqt status-notifier ipc applications login1; };
 
     corePackages = [
-      ### BASE
       login1
       ipc
       status-notifier

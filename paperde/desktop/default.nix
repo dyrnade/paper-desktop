@@ -1,4 +1,4 @@
-{ stdenv
+{ clangStdenv
 , qt5ct
 , xdg-user-dirs
 , xwayland
@@ -25,10 +25,17 @@
 , glib
 , python3
 , qt6
+,gcc8
+,lld
+,gdb
+,gnumake
+,pkgconfig
+,udisks2
+,libcxx
 }:
 
 # autoreconfHook
-stdenv.mkDerivation rec {
+clangStdenv.mkDerivation rec {
   pname = "paperde";
   version = "test";
   src = fetchFromGitLab {
@@ -41,10 +48,27 @@ stdenv.mkDerivation rec {
 
   outputs = [ "out" ];
   nativeBuildInputs = [
+    gcc8
+    lld
+    gdb
+    gnumake
+    qt6.full
     ninja
     meson
-    cmake
-    python3
+    qt6.qttools
+    ninja
+    pkgconfig
+    wayland
+    wayland-protocols
+    xwayland
+    xdg-user-dirs
+    xdg-desktop-portal
+    xdg-desktop-portal-kde    
+    xdg-desktop-portal-gtk    
+    xdg-desktop-portal-wlr
+    wayfire
+    udisks2
+    libcxx
   ];
 
   buildInputs = [
@@ -57,11 +81,11 @@ stdenv.mkDerivation rec {
     libcsys
     wayfire
     libdbusmenu-qt
-    qt6.full
   ];
+
   passthru.providedSessions = [ "paperdesktop" ];
   mesonFlags = [ "--prefix=${placeholder "out"} --buildtype=release -Duse_qt_version=qt6" ];
-
+  dontWrapQtApps = true;
   patches = [
     ./0001-fix-application-dirs.patch
   ];

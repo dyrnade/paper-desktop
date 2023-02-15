@@ -1,6 +1,6 @@
 {
   description = "paperde flake";
-
+    
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs?ref=d840126a0890621e7b220894d749132dd4bde6a0;
     #nixpkgs.url = github:NixOS/nixpkgs?ref=nixos-unstable;
@@ -16,16 +16,34 @@
     in
     rec {
       packages = rec {
-        paperde = pkgs.callPackage ./paperde { makeScope = pkgs.lib.makeScope; };
-        x86_64-linux.paperde = paperde;
+        login1 = pkgs.callPackage ./paperde/login1 { };
+        ipc = pkgs.callPackage ./paperde/ipc { };
+        status-notifier = pkgs.callPackage ./paperde/status-notifier { };
+        wayqt = pkgs.callPackage ./paperde/wayqt { };
+        applications = pkgs.callPackage ./paperde/applications { inherit ipc; };
+        libdbusmenu-qt = pkgs.callPackage ./paperde/libdbusmenu-qt { };
+        libcsys = pkgs.callPackage ./paperde/libcsys { };
+        libcprime = pkgs.callPackage ./paperde/libcprime { };
+        paper-desktop = pkgs.callPackage ./paperde/desktop { inherit libdbusmenu-qt libcprime libcsys wayqt status-notifier ipc applications login1; };
+
+        x86_64-linux.login1 = login1;
+        x86_64-linux.ipc = ipc;
+        x86_64-linux.status-notifier = status-notifier;
+        x86_64-linux.wayqt = wayqt;
+        x86_64-linux.libdbusmenu-qt = libdbusmenu-qt;
+        x86_64-linux.libcsys = libcsys;
+        x86_64-linux.libcprime = libcprime;
+        x86_64-linux.applications = applications;
+        x86_64-linux.paper-desktop = paper-desktop;
+        x86_64-linux.default = paper-desktop;
       };
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          nixosModules.paperde-desktop
-          ./configuration.nix
-        ];
-      };
+       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+         inherit system;
+         modules = [
+           nixosModules.paperde-desktop
+           ./configuration.nix
+         ];
+       };
       nixosModules.paperde-desktop =
         { config
         , lib
@@ -36,7 +54,6 @@
           with lib; let
             xcfg = config.services.xserver;
             cfg = xcfg.desktopManager.paperde;
-            paperdes = pkgs.callPackage ./paperde { makeScope = lib.makeScope; };
           in
           {
             options = {
@@ -50,13 +67,10 @@
             config = mkIf cfg.enable {
 
               services.xserver.displayManager.sessionPackages = [
-                paperdes.paperde-desktop
+                packages.paper-desktop
               ];
 
-              environment.systemPackages =
-                paperdes.corePackages;
-
-              environment.sessionVariables.WAYFIRE_CONFIG_FILE = "${paperdes.paperde-desktop}/share/paperde/wayfire.ini";
+              environment.sessionVariables.WAYFIRE_CONFIG_FILE = "${packages.paper-desktop}/share/paperde/wayfire.ini";
               environment.sessionVariables.QT_QPA_PLATFORM = "wayland";
 
               # Link some extra directories in /run/current-system/software/share
