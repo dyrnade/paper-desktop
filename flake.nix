@@ -22,6 +22,7 @@
         wayqt = pkgs.callPackage ./paperde/wayqt { };
         applications = pkgs.callPackage ./paperde/applications { inherit ipc; };
         libdbusmenu-qt = pkgs.callPackage ./paperde/libdbusmenu-qt { };
+        qt6ct = pkgs.callPackage ./paperde/qt6ct { };
         libcsys = pkgs.callPackage ./paperde/libcsys { };
         libcprime = pkgs.callPackage ./paperde/libcprime { };
         paper-desktop = pkgs.callPackage ./paperde/desktop { inherit libdbusmenu-qt libcprime libcsys wayqt status-notifier ipc applications login1; };
@@ -31,6 +32,7 @@
         x86_64-linux.status-notifier = status-notifier;
         x86_64-linux.wayqt = wayqt;
         x86_64-linux.libdbusmenu-qt = libdbusmenu-qt;
+        x86_64-linux.qt6ct = qt6ct;
         x86_64-linux.libcsys = libcsys;
         x86_64-linux.libcprime = libcprime;
         x86_64-linux.applications = applications;
@@ -69,7 +71,10 @@
               services.xserver.displayManager.sessionPackages = [
                 packages.paper-desktop
               ];
-
+              
+              environment.systemPackages = [
+                packages.paper-desktop pkgs.wayfire
+               ];
               environment.sessionVariables.WAYFIRE_CONFIG_FILE = "${packages.paper-desktop}/share/paperde/wayfire.ini";
               environment.sessionVariables.QT_QPA_PLATFORM = "wayland";
 

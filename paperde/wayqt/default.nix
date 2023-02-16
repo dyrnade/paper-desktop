@@ -13,7 +13,6 @@ stdenv.mkDerivation rec {
   };
   outputs = [ "out" ];
 
-
   nativeBuildInputs = [
     ninja
     meson
@@ -21,6 +20,7 @@ stdenv.mkDerivation rec {
     cmake
     python3
     qt6.wrapQtAppsHook
+    qt6.qtwayland
     wayland
     wayland-protocols
   ];
