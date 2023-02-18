@@ -96,7 +96,7 @@ in
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.desktopManager.paperde.enable = true;
 
-  virtualisation.docker.enable = false;
+  virtualisation.docker.enable = true;
 
   services.xserver.desktopManager.enlightenment.enable = false;
 
